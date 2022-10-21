@@ -19,7 +19,7 @@ Kustomize lets you modify anything in existing kubernetes manifests. You could u
 Yes it does, but using it does not fit my App of Apps workflow that's centered around Helm. It requires rearranging my file structure and <u>systematically<u> using kustomize to build apps, even when there is nothing to kustomize (or have two different kinds of app structures that I'd need to migrate from one to the other).
 
 ## Why make this repo ? Doesn't this already exist ?
-There are CMP sources out there (like [here](https://medium.com/dzerolabs/turbocharge-argocd-with-app-of-apps-pattern-and-kustomized-helm-ea4993190e7c), and [here](https://github.com/argoproj/argocd-example-apps/tree/master/plugins/kustomized-helm#helm--kustomize)), but they all use a method [now depracated](/plugin%20source/README.md).<br>
+There are CMP sources out there (like [here](https://medium.com/dzerolabs/turbocharge-argocd-with-app-of-apps-pattern-and-kustomized-helm-ea4993190e7c), and [here](https://github.com/argoproj/argocd-example-apps/tree/master/plugins/kustomized-helm#helm--kustomize)), but they all use a method [now depracated](/plugin%20source).<br>
 Also, those do not allow me to also include helm templates within my `kustomization.yaml` file.
 <br>
 <br>
