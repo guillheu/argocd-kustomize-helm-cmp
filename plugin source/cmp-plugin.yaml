@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cmp-plugin
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: kustomize-helm
+    spec:
+      version: v1.0
+      generate:
+        # forcing namespace to $ARGOCD_APP_NAMESPACE for consistency when switching between standard helm deployment and this CMP deployment.
+        command: ["/bin/sh", "-c", "helm dependency build > /dev/null \
+          && helm template . --name-template ${ARGOCD_APP_NAME} --include-crds -f values.yaml --namespace $ARGOCD_APP_NAMESPACE > all.yaml \
+          && rm -r templates/* > /dev/null \
+          && mv all.yaml templates/all.yaml > /dev/null \
+          && kustomize build -o templates/all.yaml  > /dev/null \
+          && helm template . --name-template ${ARGOCD_APP_NAME} --include-crds -f values.yaml --namespace $ARGOCD_APP_NAMESPACE"]
+          
+          # Issue : passing custom environment variables from the application manifest to the CMP does not seem to work.
+          # When fixed, replace "values.yaml" with $VALUES_FILE
+
+      discover:
+        find:
+          command: ["/bin/sh", "-c", "find . -name Chart.yaml && find . -name kustomization.yaml"]
