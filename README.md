@@ -16,4 +16,13 @@ However, Helm does not make it easy to modify existing helm charts outside of wh
 Kustomize lets you modify anything in existing kubernetes manifests. You could use it to configure a complex app just like you do with Helm's values configuration, but that would take a lot more time and is overall a waste of time for very complex apps. However, it is fantastic at applying a small patch to any kubernetes resource (for instance, adding a sidecar container to an existing deployment, modifying a configmap, changing the container image used in a pod etc...) <u>without touching the original file<u>! This last detail is extremely important when doing GitOps, since it lets you keep the original manifests on your repo.
 
 #### Doesn't Kustomize have an `--enable-helm` option ?
-Yes it does, but using it does not fit my workflow that's centered around Helm. It requires rearranging my file structure and <u>systematically<u> using kustomize to build apps, even when there is nothing to kustomize (or have two different kinds of app structures that I'd need to migrate from one to the other).
+Yes it does, but using it does not fit my App of Apps workflow that's centered around Helm. It requires rearranging my file structure and <u>systematically<u> using kustomize to build apps, even when there is nothing to kustomize (or have two different kinds of app structures that I'd need to migrate from one to the other).
+
+## Why make this repo ? Doesn't this already exist ?
+There are CMP sources out there (like [here](https://medium.com/dzerolabs/turbocharge-argocd-with-app-of-apps-pattern-and-kustomized-helm-ea4993190e7c), and [here](https://github.com/argoproj/argocd-example-apps/tree/master/plugins/kustomized-helm#helm--kustomize)), but they all use a method [now depracated](/plugin%20source/README.md).<br>
+Also, those do not allow me to also include helm templates within my `kustomization.yaml` file.
+<br>
+<br>
+<br>
+<br>
+Thanks to [the jfrog blog](https://jfrog.com/blog/power-up-helm-charts-using-kustomize-to-manage-kubernetes-deployments/) for the example sources.

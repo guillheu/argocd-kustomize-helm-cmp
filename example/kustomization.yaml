@@ -1,0 +1,11 @@
+patchesJson6902:
+- target:
+    version: v1
+    kind: Pod
+    name: helloworld
+  patch: |-
+    - op: replace
+      path: /spec/containers/0/args
+      value: ["/bin/echo My name is {{ .Values.echoData.employeeName}}. I work for {{ .Values.echoData.employeeDepartment}} department. Our company name is {{ .Values.echoData.companyName}}"]
+resources:
+- templates/all.yaml
