@@ -1,6 +1,6 @@
 [The old way](https://argo-cd.readthedocs.io/en/stable/user-guide/config-management-plugins/#option-1-configure-plugins-via-argo-cd-configmap) to make a CMP in ArgoCD [has been depracated](https://argo-cd.readthedocs.io/en/latest/operator-manual/upgrading/2.4-2.5/#argocd-cm-plugins-cmps-are-deprecated) since argocd version 2.4 and will be removed in version 2.6. Instead, [ArgoCD recommends using a sidecar container to the `argocd-repo-server` pod](https://argo-cd.readthedocs.io/en/stable/user-guide/config-management-plugins/#option-2-configure-plugin-via-sidecar).<br>
 The `cmp-plugin.yaml` follows the suggested way of making a CMP : it's a configmap containing the definition of a plugin that will be mounted onto the sidecar container.<br>
-The `sidecar-only.yaml` file contains only the lines I added to the `argocd-repo-server` deployment of my argocd install.<br>
+The `sidecar-only.yaml` file contains only the lines I added to the `argocd-repo-server` deployment of my argocd install. It uses [a custom container with helm, kubectl and kustomize binaries](https://github.com/guillheu/kustomize-helm-docker).<br>
 This plugin only runs server-side. It will not modify your git repository. That's why removing the initial helm sources is not actually a problem.<br>
 <br>
 This specific CMP will do the following :<br>
