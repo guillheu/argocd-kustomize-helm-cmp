@@ -12,4 +12,4 @@ This specific CMP will do the following :<br>
 <br>
 
 The two Helm runs are important, as is illustrated in the [example](../example/) : the first run of `helm template` will only catch the container name field in the final manifest of the example, but not the helm fields added by kustomize as defined in [`kustomization.yaml`](../example/kustomization.yaml).<br>
-The `> /dev/null` at the end of some commands is necessary to negate printing to stdout ; ArgoCD will actually read stdout and look for the kubernetes manifests there so we need to keep stdout clean.
+The `> /dev/null` at the end of some commands is necessary to negate printing to stdout ; ArgoCD will actually read stdout and look for the kubernetes manifests there so we need to keep stdout clean until the final print of all the manifests at once with the final `helm template`.
